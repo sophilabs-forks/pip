@@ -1,0 +1,72 @@
+<html>
+    <head>
+        <style>
+            html, body {
+                margin: 0;
+                padding: 0;
+                background: black;
+            }
+            div {
+                margin: 0;
+                padding: 0;
+                background: black;
+                width: 100%;
+                height: 100%;
+           }
+            iframe {
+                position: absolute;
+                transform: translate(0, -50%);
+                top: 50%;
+                margin: 0;
+                width: 85vw;
+                height: calc(85vw * 9 / 16);
+            }
+            video {
+                position: absolute;
+                transform: rotateY(180deg);
+                right: 0;
+                top: 0;
+                margin: 0;
+                width: 25vw;
+                z-index: 1;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div id="area">
+            <iframe id="iframe" src="https://docs.google.com/presentation/d/1-OZGFj_CFf8LYkRo2jQfAdaCIbhJ5YuPMLvoR6fWn_c/embed?rm=minimal" frameborder="0" allowfullscreen="false" mozallowfullscreen="false" webkitallowfullscreen="false" allowtransparency="true"></iframe>
+            <video id="video"></video>
+        </div>
+        <script
+          src="https://code.jquery.com/jquery-3.3.1.min.js"
+          integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+          crossorigin="anonymous"></script>
+        <script>
+            var area = document.getElementById('area');
+            var iframe = document.getElementById('iframe');
+            var video = document.getElementById('video');
+            if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+                navigator.mediaDevices.getUserMedia({
+                    video: true
+                }).then(function(stream) {
+                    video.src = window.URL.createObjectURL(stream);
+                    video.play();
+                });
+            }
+
+            $(document).click(function() {
+                iframe.contentWindow.focus();
+                if (area.requestFullscreen) {
+                  area.requestFullscreen();
+                }
+                else if (area.webkitRequestFullScreen) {
+                  area.webkitRequestFullScreen();
+                }
+           });
+            $(document).ready(function() {
+                iframe.contentWindow.focus();
+           });
+        </script>
+    </body>
+</html>
