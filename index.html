@@ -51,12 +51,12 @@
                     video: true
                 }).then(function(stream) {
                     video.src = window.URL.createObjectURL(stream);
-                    video.play();
                 });
             }
 
             $(document).click(function() {
                 iframe.contentWindow.focus();
+                video.play();
                 if (area.requestFullscreen) {
                   area.requestFullscreen();
                 }
